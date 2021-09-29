@@ -1,10 +1,13 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { StatusBar, Text, View } from 'react-native'
 
 export const CharacterScreen = () => {
   return (
-    <View>
-      <Text>Character</Text>
-    </View>
+    <>
+      <StatusBar hidden={true} />
+      <View>
+        <Text>Character</Text>
+      </View>
+    </>
   )
 }
