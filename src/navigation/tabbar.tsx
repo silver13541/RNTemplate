@@ -2,15 +2,15 @@ import React from 'react'
 import { StatusBar, Text, TouchableOpacity, View } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
+import { Character } from 'src/assets/images/icons/Character'
+import { Episode } from 'src/assets/images/icons/Episode'
+import { Location } from 'src/assets/images/icons/Location'
 import { CharacterScreen } from 'src/modules/character'
 import { EpisodeScreen } from 'src/modules/episode'
 import { LocationScreen } from 'src/modules/location'
+import { colors } from 'src/theme/colors'
 
 import { Routes } from './routes'
-import { Character } from 'src/assets/images/icons/Character'
-import { Location } from 'src/assets/images/icons/Location'
-import { Episode } from 'src/assets/images/icons/Episode'
-import { colors } from 'src/theme/colors'
 
 const Tab = createBottomTabNavigator()
 
