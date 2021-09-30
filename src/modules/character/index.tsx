@@ -22,7 +22,7 @@ export const CharacterScreen = () => {
   if (loading) return <Text>Loading...</Text>
 
   return (
-    <View style={{ flex: 1 }}>
+    <View>
       <StatusBar hidden={true} />
       <FlatList
         data={data.characters.results}
