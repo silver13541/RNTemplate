@@ -1,5 +1,4 @@
 import React from 'react'
-import { StatusBar, Text, TouchableOpacity, View } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import { Character } from 'src/assets/images/icons/Character'
@@ -26,18 +25,7 @@ export const TabBar = () => {
           paddingTop: 89,
           paddingBottom: 10,
         },
-        headerStyle: { height: 140, backgroundColor: colors.gray },
-        headerRight: () => (
-          <Text
-            style={{
-              paddingRight: 16,
-              color: `${colors.indigo}`,
-              fontSize: 17,
-              lineHeight: 22,
-            }}>
-            Filter
-          </Text>
-        ),
+        headerStyle: { height: 140, backgroundColor: colors.gray[0] },
       }}>
       <Tab.Screen
         name={Routes.CharacterScreen}

@@ -1,12 +1,9 @@
 import React from 'react'
-import Svg, { Path } from "react-native-svg"
+import Svg, { Path } from 'react-native-svg'
 
 export const Character = () => {
   return (
-    <Svg
-      width={28}
-      height={28}
-      fill="none">
+    <Svg width={28} height={28} fill="none">
       <Path
         fillRule="evenodd"
         clipRule="evenodd"
