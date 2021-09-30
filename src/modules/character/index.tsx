@@ -1,20 +1,10 @@
-import React, { useEffect } from 'react'
-import { FlatList, ScrollView, StatusBar, Text, View } from 'react-native'
-import { gql, useQuery } from '@apollo/client'
+import React from 'react'
+import { FlatList, StatusBar, Text, View } from 'react-native'
+import { useQuery } from '@apollo/client'
 
-import { Characters } from '../components/Characters'
+import { CHARACTERS_QUERY } from 'src/graphql/queries/characters'
 
-const CHARACTERS_QUERY = gql`
-  query Characters {
-    characters {
-      results {
-        name
-        status
-        image
-      }
-    }
-  }
-`
+import { CharacterCard } from './character-card'
 
 export const CharacterScreen = () => {
   const { data, loading } = useQuery(CHARACTERS_QUERY)
@@ -28,7 +18,7 @@ export const CharacterScreen = () => {
         data={data.characters.results}
         contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap' }}
         renderItem={({ item }) => (
-          <Characters
+          <CharacterCard
             name={item.name}
             status={item.status}
             image={item.image}

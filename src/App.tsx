@@ -1,6 +1,7 @@
 import React from 'react'
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import { NavigationContainer } from '@react-navigation/native'
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
+
 import { RootNavigation } from 'src/navigation/root'
 
 import { AlertProvider } from './modules/alert-context'

@@ -34,7 +34,7 @@ const Name = styled.Text`
   padding-bottom: 26px;
 `
 
-export const Characters = ({ name, status, image }) => {
+export const CharacterCard = ({ name, status, image }) => {
   return (
     <Container>
       <CharImage source={{ uri: image }} />
