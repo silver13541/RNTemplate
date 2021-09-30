@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/native'
 
+import { Character } from 'src/generated/graphql'
 import { colors } from 'src/theme/colors'
 
 const Container = styled.View`
@@ -8,10 +9,10 @@ const Container = styled.View`
   margin: 9px 9px;
   width: 163px;
   border-radius: 8px;
+  border: 1px solid ${colors.gray[2]};
 `
 
 const CharImage = styled.Image`
-  width: 163px;
   height: 140px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
@@ -34,7 +35,7 @@ const Name = styled.Text`
   padding-bottom: 26px;
 `
 
-export const CharacterCard = ({ name, status, image }) => {
+export const CharacterCard = ({ name, status, image }: Character) => {
   return (
     <Container>
       <CharImage source={{ uri: image }} />

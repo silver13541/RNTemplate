@@ -1,30 +1,62 @@
-import React from 'react'
-import { FlatList, StatusBar, Text, View } from 'react-native'
-import { useQuery } from '@apollo/client'
+import React, { useState } from 'react'
+import { FlatList, StatusBar, Text } from 'react-native'
+import styled from 'styled-components/native'
 
-import { CHARACTERS_QUERY } from 'src/graphql/queries/characters'
+import { useCharactersQuery } from 'src/generated/graphql'
+import { colors } from 'src/theme/colors'
 
 import { CharacterCard } from './character-card'
 
+const Container = styled.View`
+  background-color: ${colors.white};
+`
+
 export const CharacterScreen = () => {
-  const { data, loading } = useQuery(CHARACTERS_QUERY)
+  const [currentPage, setCurrentPage] = useState(1)
+
+  const { data, loading, fetchMore } = useCharactersQuery({
+    variables: {
+      page: 1,
+    },
+  })
+
+  const loadMore = () => {
+    fetchMore({
+      variables: {
+        page: currentPage + 1,
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) => {
+        return {
+          characters: {
+            results: [
+              ...previousResult.characters.results,
+              ...fetchMoreResult.characters.results,
+            ],
+          },
+        }
+      },
+    })
+    setCurrentPage(currentPage + 1)
+  }
+
+  const renderItem = ({ item }: IRenderItem) => (
+    <CharacterCard name={item.name} status={item.status} image={item.image} />
+  )
 
   if (loading) return <Text>Loading...</Text>
 
   return (
-    <View>
+    <Container>
       <StatusBar hidden={true} />
       <FlatList
+        key={'#'}
+        keyExtractor={(item) => item.name}
         data={data.characters.results}
-        contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap' }}
-        renderItem={({ item }) => (
-          <CharacterCard
-            name={item.name}
-            status={item.status}
-            image={item.image}
-          />
-        )}
+        numColumns={2}
+        onEndReachedThreshold={0.5}
+        onEndReached={loadMore}
+        renderItem={renderItem}
       />
-    </View>
+    </Container>
   )
 }

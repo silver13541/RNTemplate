@@ -1,3 +1,6 @@
+import { gql } from '@apollo/client'
+import * as Apollo from '@apollo/client'
+
 export type Maybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K]
@@ -8,6 +11,7 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
   [SubKey in K]: Maybe<T[SubKey]>
 }
+const defaultOptions = {}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string
@@ -29,7 +33,7 @@ export type Character = {
   /** Time at which the character was created in the database. */
   created?: Maybe<Scalars['String']>
   /** Episodes in which this character appeared. */
-  episode: Array<Maybe<Episode>>
+  episode?: Array<Maybe<Episode>>
   /** The gender of the character ('Female', 'Male', 'Genderless' or 'unknown'). */
   gender?: Maybe<Scalars['String']>
   /** The id of the character. */
@@ -194,3 +198,94 @@ export type QueryLocationsArgs = {
 export type QueryLocationsByIdsArgs = {
   ids: Array<Scalars['ID']>
 }
+
+export type CharactersQueryVariables = Exact<{
+  page?: Maybe<Scalars['Int']>
+}>
+
+export type CharactersQuery = {
+  __typename?: 'Query'
+  characters?:
+    | {
+        __typename?: 'Characters'
+        results?:
+          | Array<
+              | {
+                  __typename?: 'Character'
+                  name?: string | null | undefined
+                  status?: string | null | undefined
+                  image?: string | null | undefined
+                }
+              | null
+              | undefined
+            >
+          | null
+          | undefined
+      }
+    | null
+    | undefined
+}
+
+export const CharactersDocument = gql`
+  query Characters($page: Int) {
+    characters(page: $page) {
+      results {
+        name
+        status
+        image
+      }
+    }
+  }
+`
+
+/**
+ * __useCharactersQuery__
+ *
+ * To run a query within a React component, call `useCharactersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCharactersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCharactersQuery({
+ *   variables: {
+ *      page: // value for 'page'
+ *   },
+ * });
+ */
+export function useCharactersQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    CharactersQuery,
+    CharactersQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+
+  return Apollo.useQuery<CharactersQuery, CharactersQueryVariables>(
+    CharactersDocument,
+    options,
+  )
+}
+
+export function useCharactersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    CharactersQuery,
+    CharactersQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+
+  return Apollo.useLazyQuery<CharactersQuery, CharactersQueryVariables>(
+    CharactersDocument,
+    options,
+  )
+}
+export type CharactersQueryHookResult = ReturnType<typeof useCharactersQuery>
+export type CharactersLazyQueryHookResult = ReturnType<
+  typeof useCharactersLazyQuery
+>
+export type CharactersQueryResult = Apollo.QueryResult<
+  CharactersQuery,
+  CharactersQueryVariables
+>
