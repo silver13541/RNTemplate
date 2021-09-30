@@ -35,6 +35,10 @@ allprojects {
 
         google()
         jcenter()
+<<<<<<< HEAD
+=======
+        
+>>>>>>> navigation
         maven { url 'https://www.jitpack.io' }
     }
 }
