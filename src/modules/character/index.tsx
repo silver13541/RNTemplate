@@ -6,7 +6,7 @@ export const CharacterScreen = () => {
     <>
       <StatusBar hidden={true} />
       <View>
-        <Text>Character</Text>
+        <Text>Characters</Text>
       </View>
     </>
   )
