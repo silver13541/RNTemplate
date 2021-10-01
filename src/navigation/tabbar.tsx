@@ -26,6 +26,8 @@ export const TabBar = () => {
           paddingBottom: 10,
         },
         headerStyle: { height: 140, backgroundColor: colors.gray[0] },
+        tabBarInactiveTintColor: colors.gray[3],
+        tabBarActiveTintColor: colors.indigo,
       }}>
       <Tab.Screen
         name={Routes.CharacterScreen}
@@ -33,11 +35,7 @@ export const TabBar = () => {
         options={{
           tabBarLabel: 'Character',
           headerTitle: 'Character',
-          tabBarIcon: ({ focused }) => (
-            <CharacterIcon
-              color={focused ? `${colors.indigo}` : `${colors.gray[3]}`}
-            />
-          ),
+          tabBarIcon: ({ color }) => <CharacterIcon color={color} />,
         }}
       />
       <Tab.Screen
@@ -46,11 +44,7 @@ export const TabBar = () => {
         options={{
           tabBarLabel: 'Location',
           headerTitle: 'Location',
-          tabBarIcon: ({ focused }) => (
-            <LocationIcon
-              color={focused ? `${colors.indigo}` : `${colors.gray[3]}`}
-            />
-          ),
+          tabBarIcon: ({ color }) => <LocationIcon color={color} />,
         }}
       />
 
@@ -60,11 +54,7 @@ export const TabBar = () => {
         options={{
           tabBarLabel: 'Episode',
           headerTitle: 'Episode',
-          tabBarIcon: ({ focused }) => (
-            <EpisodeIcon
-              color={focused ? `${colors.indigo}` : `${colors.gray[3]}`}
-            />
-          ),
+          tabBarIcon: ({ color }) => <EpisodeIcon color={color} />,
         }}
       />
     </Tab.Navigator>
