@@ -1,10 +1,9 @@
 import React from 'react'
-import { StatusBar, Text, TouchableOpacity, View } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-import { Character } from 'src/assets/images/icons/Character'
-import { Episode } from 'src/assets/images/icons/Episode'
-import { Location } from 'src/assets/images/icons/Location'
+import { CharacterIcon } from 'src/assets/images/icons/CharacterIcon'
+import { EpisodeIcon } from 'src/assets/images/icons/EpisodeIcon'
+import { LocationIcon } from 'src/assets/images/icons/LocationIcon'
 import { CharacterScreen } from 'src/modules/character'
 import { EpisodeScreen } from 'src/modules/episode'
 import { LocationScreen } from 'src/modules/location'
@@ -26,33 +25,32 @@ export const TabBar = () => {
           paddingTop: 89,
           paddingBottom: 10,
         },
-        headerStyle: { height: 140, backgroundColor: colors.gray },
-        headerRight: () => (
-          <Text
-            style={{
-              paddingRight: 16,
-              color: `${colors.indigo}`,
-              fontSize: 17,
-              lineHeight: 22,
-            }}>
-            Filter
-          </Text>
-        ),
+        headerStyle: { height: 140, backgroundColor: colors.gray[0] },
       }}>
       <Tab.Screen
         name={Routes.CharacterScreen}
         component={CharacterScreen}
         options={{
+          tabBarLabel: 'Character',
           headerTitle: 'Character',
-          tabBarIcon: ({ focused }) => <Character />,
+          tabBarIcon: ({ focused }) => (
+            <CharacterIcon
+              color={focused ? `${colors.indigo}` : `${colors.gray[3]}`}
+            />
+          ),
         }}
       />
       <Tab.Screen
         name={Routes.LocationScreen}
         component={LocationScreen}
         options={{
+          tabBarLabel: 'Location',
           headerTitle: 'Location',
-          tabBarIcon: ({ focused }) => <Location />,
+          tabBarIcon: ({ focused }) => (
+            <LocationIcon
+              color={focused ? `${colors.indigo}` : `${colors.gray[3]}`}
+            />
+          ),
         }}
       />
 
@@ -60,8 +58,13 @@ export const TabBar = () => {
         name={Routes.EpisodeScreen}
         component={EpisodeScreen}
         options={{
+          tabBarLabel: 'Episode',
           headerTitle: 'Episode',
-          tabBarIcon: ({ focused }) => <Episode />,
+          tabBarIcon: ({ focused }) => (
+            <EpisodeIcon
+              color={focused ? `${colors.indigo}` : `${colors.gray[3]}`}
+            />
+          ),
         }}
       />
     </Tab.Navigator>
