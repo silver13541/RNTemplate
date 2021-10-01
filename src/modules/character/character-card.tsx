@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/native'
 
-import { Character } from 'src/generated/graphql'
+import { CharactersQuery } from 'src/generated/graphql'
 import { colors } from 'src/theme/colors'
 
 const Container = styled.View`
@@ -35,7 +35,11 @@ const Name = styled.Text`
   padding-bottom: 26px;
 `
 
-export const CharacterCard = ({ name, status, image }: Character) => {
+export const CharacterCard = ({
+  name,
+  status,
+  image,
+}: CharactersQuery['characters']['results']) => {
   return (
     <Container>
       <CharImage source={{ uri: image }} />

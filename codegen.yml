@@ -6,7 +6,10 @@ generates:
     plugins:
       - "typescript"
       - "typescript-operations"
-      - "typescript-react-apollo"
+      - "typescript-react-apollo" 
+    config:
+      maybeValue: T
+      avoidOptionals: true
   ./graphql.schema.json:
     plugins:
       - "introspection"

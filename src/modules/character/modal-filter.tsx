@@ -1,8 +1,8 @@
 import React from 'react'
-import { Text, View } from 'react-native'
 import styled from 'styled-components/native'
 
 import { colors } from 'src/theme/colors'
+import { Button } from 'src/ui/button'
 
 const Container = styled.View`
   height: 400px;
@@ -49,9 +49,10 @@ export const ModalFilter = () => {
     <Container>
       <FilterApplyContainer>
         <FilterText>Filter</FilterText>
-        <Apply>
-          <TextApply>APPLY</TextApply>
-        </Apply>
+        <Button
+          title={'APPLY'}
+          style={{ backgroundColor: `${colors.indigo}`, height: 28 }}
+        />
       </FilterApplyContainer>
     </Container>
   )

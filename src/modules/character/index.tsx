@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { FlatList, Text, TouchableOpacity, View } from 'react-native'
+import { FlatList, Text, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 
 import { useCharactersQuery } from 'src/generated/graphql'
+import { useNavigation } from 'src/navigation/routes'
 import { colors } from 'src/theme/colors'
 import { ModalMenu } from 'src/ui/modal'
 
@@ -19,7 +20,8 @@ const TextFilter = styled.Text`
   line-height: 22px;
 `
 
-export const CharacterScreen = ({ navigation }) => {
+export const CharacterScreen = () => {
+  const navigation = useNavigation()
   const [showModal, setShowModal] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   navigation.setOptions({
@@ -45,8 +47,8 @@ export const CharacterScreen = ({ navigation }) => {
         return {
           characters: {
             results: [
-              ...previousResult.characters.results,
-              ...fetchMoreResult.characters.results,
+              ...(previousResult?.characters?.results ?? []),
+              ...(fetchMoreResult?.characters?.results ?? []),
             ],
           },
         }
@@ -65,8 +67,8 @@ export const CharacterScreen = ({ navigation }) => {
     <Container>
       <FlatList
         key={'#'}
-        keyExtractor={(item) => item.name}
-        data={data.characters.results}
+        keyExtractor={(item) => String(item?.name)}
+        data={data?.characters?.results ?? []}
         numColumns={2}
         onEndReachedThreshold={0.5}
         onEndReached={loadMore}
