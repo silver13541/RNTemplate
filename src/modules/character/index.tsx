@@ -6,7 +6,7 @@ import { useCharactersQuery } from 'src/generated/graphql'
 import { colors } from 'src/theme/colors'
 import { ModalMenu } from 'src/ui/modal'
 
-import { CharacterCard } from './characterCard'
+import { CharacterCard } from './character-card'
 import { ModalFilter } from './modalFilter'
 
 const Container = styled.View`

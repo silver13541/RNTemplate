@@ -43,7 +43,7 @@ export const ModalMenu: FC<IModalMenu> = ({
       useNativeDriver
       hideModalContentWhileAnimating>
       <Container>
-        <Blur blurType={'regular'}>{children}</Blur>
+        <Blur blurType={'light'}>{children}</Blur>
       </Container>
     </StyledModal>
   )

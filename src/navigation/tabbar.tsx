@@ -1,9 +1,9 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-import { Character } from 'src/assets/images/icons/Character'
-import { Episode } from 'src/assets/images/icons/Episode'
-import { Location } from 'src/assets/images/icons/Location'
+import { CharacterIcon } from 'src/assets/images/icons/CharacterIcon'
+import { EpisodeIcon } from 'src/assets/images/icons/EpisodeIcon'
+import { LocationIcon } from 'src/assets/images/icons/LocationIcon'
 import { CharacterScreen } from 'src/modules/character'
 import { EpisodeScreen } from 'src/modules/episode'
 import { LocationScreen } from 'src/modules/location'
@@ -32,7 +32,7 @@ export const TabBar = () => {
         component={CharacterScreen}
         options={{
           headerTitle: 'Character',
-          tabBarIcon: ({ focused }) => <Character />,
+          tabBarIcon: ({ focused }) => <CharacterIcon />,
         }}
       />
       <Tab.Screen
@@ -40,7 +40,7 @@ export const TabBar = () => {
         component={LocationScreen}
         options={{
           headerTitle: 'Location',
-          tabBarIcon: ({ focused }) => <Location />,
+          tabBarIcon: ({ focused }) => <LocationIcon />,
         }}
       />
 
@@ -49,7 +49,7 @@ export const TabBar = () => {
         component={EpisodeScreen}
         options={{
           headerTitle: 'Episode',
-          tabBarIcon: ({ focused }) => <Episode />,
+          tabBarIcon: ({ focused }) => <EpisodeIcon />,
         }}
       />
     </Tab.Navigator>
