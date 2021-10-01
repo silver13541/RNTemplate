@@ -31,18 +31,24 @@ export const TabBar = () => {
         name={Routes.CharacterScreen}
         component={CharacterScreen}
         options={{
-          tabBarLabel: 'Character',
           headerTitle: 'Character',
-          tabBarIcon: ({ focused }) => <CharacterIcon />,
+          tabBarIcon: ({ focused }) => (
+            <CharacterIcon
+              color={focused ? `${colors.indigo}` : `${colors.gray[3]}`}
+            />
+          ),
         }}
       />
       <Tab.Screen
         name={Routes.LocationScreen}
         component={LocationScreen}
         options={{
-          tabBarLabel: 'Location',
           headerTitle: 'Location',
-          tabBarIcon: ({ focused }) => <LocationIcon />,
+          tabBarIcon: ({ focused }) => (
+            <LocationIcon
+              color={focused ? `${colors.indigo}` : `${colors.gray[3]}`}
+            />
+          ),
         }}
       />
 
@@ -50,9 +56,12 @@ export const TabBar = () => {
         name={Routes.EpisodeScreen}
         component={EpisodeScreen}
         options={{
-          tabBarLabel: 'Episode',
           headerTitle: 'Episode',
-          tabBarIcon: ({ focused }) => <EpisodeIcon />,
+          tabBarIcon: ({ focused }) => (
+            <EpisodeIcon
+              color={focused ? `${colors.indigo}` : `${colors.gray[3]}`}
+            />
+          ),
         }}
       />
     </Tab.Navigator>

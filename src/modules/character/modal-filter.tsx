@@ -37,11 +37,9 @@ const Apply = styled.TouchableOpacity`
   background-color: ${colors.indigo};
 `
 
-const TextApply = styled.Text`
-  font-weight: 600;
-  font-size: 13px;
-  line-height: 18px;
-  color: ${colors.white};
+const B = styled(Button)`
+  background-color: ${colors.indigo};
+  height: 28px;
 `
 
 export const ModalFilter = () => {
@@ -49,10 +47,7 @@ export const ModalFilter = () => {
     <Container>
       <FilterApplyContainer>
         <FilterText>Filter</FilterText>
-        <Button
-          title={'APPLY'}
-          style={{ backgroundColor: `${colors.indigo}`, height: 28 }}
-        />
+        <B title={'APPLY'} />
       </FilterApplyContainer>
     </Container>
   )

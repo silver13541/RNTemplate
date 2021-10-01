@@ -66,7 +66,6 @@ export const CharacterScreen = () => {
   return (
     <Container>
       <FlatList
-        key={'#'}
         keyExtractor={(item) => String(item?.name)}
         data={data?.characters?.results ?? []}
         numColumns={2}
