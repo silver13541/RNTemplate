@@ -7,7 +7,7 @@ import { colors } from 'src/theme/colors'
 import { ModalMenu } from 'src/ui/modal'
 
 import { CharacterCard } from './character-card'
-import { ModalFilter } from './modalFilter'
+import { ModalFilter } from './modal-filter'
 
 const Container = styled.View`
   background-color: ${colors.white};
