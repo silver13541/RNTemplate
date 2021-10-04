@@ -9237,7 +9237,7 @@
     "shallowequal" "^1.1.0"
     "supports-color" "^5.5.0"
 
-"styled-tools@1.7.2":
+"styled-tools@^1.7.2":
   "integrity" "sha512-IjLxzM20RMwAsx8M1QoRlCG/Kmq8lKzCGyospjtSXt/BTIIcvgTonaxQAsKnBrsZNwhpHzO9ADx5te0h76ILVg=="
   "resolved" "https://registry.npmjs.org/styled-tools/-/styled-tools-1.7.2.tgz"
   "version" "1.7.2"

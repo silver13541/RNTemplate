@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
 import styled from 'styled-components/native'
+import { ifProp, prop } from 'styled-tools'
 
-import { Arrow } from 'src/assets/images/icons/Arrow'
+import { RightArrow } from 'src/assets/images/icons/RightArrow'
 import { colors } from 'src/theme/colors'
 import { Button } from 'src/ui/button'
+
+import { Gender } from './gender'
+import { Status } from './status'
 
 const Container = styled.View`
   background-color: ${colors.white};
@@ -26,7 +30,7 @@ const FilterText = styled.Text`
   margin-right: 95px;
 `
 
-const B = styled(Button)`
+const Apply = styled(Button)`
   background-color: ${colors.indigo};
   height: 28px;
   margin-top: 18px;
@@ -43,10 +47,14 @@ const ContainerSelect = styled.TouchableOpacity`
   margin-bottom: 19px;
 `
 
-const RadioButton = styled.TouchableOpacity`
+export const RadioButton = styled.View`
   width: 22px;
   height: 22px;
-  background-color: ${(props) => props.color || 'transparent'};
+  background-color: ${ifProp(
+    { isChecked: true },
+    colors.indigo,
+    'transparent',
+  )};
   border-radius: 11px;
   border: 1.5px solid ${colors.gray[4]};
 `
@@ -83,7 +91,7 @@ const HeadLine = styled.Text`
   color: ${colors.gray[6]};
 `
 
-const MapContainer = styled.View`
+export const MapContainer = styled.View`
   border-top-width: 0.4px;
   border-bottom-width: 0.4px;
   padding-left: 19px;
@@ -91,20 +99,20 @@ const MapContainer = styled.View`
   margin-bottom: 30px;
 `
 
-const ItemContainer = styled.View`
+export const ItemContainer = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   height: 43px;
 `
 
-const TextContainer = styled.View`
+export const TextContainer = styled.View`
   border-bottom-width: 0.2px;
   margin-left: 16px;
   height: 43px;
   flex: 1;
 `
 
-const StatusText = styled.Text`
+export const StatusText = styled.Text`
   padding-top: 10.5px;
   font-size: 17px;
   line-height: 22px;
@@ -120,7 +128,7 @@ export const ModalFilter = () => {
     <Container>
       <FilterApplyContainer>
         <FilterText>Filter</FilterText>
-        <B title={'APPLY'} />
+        <Apply title={'APPLY'} />
       </FilterApplyContainer>
       <ContainerSelect>
         <RadioButton />
@@ -129,7 +137,7 @@ export const ModalFilter = () => {
           <SelectPrompt>Give a name</SelectPrompt>
         </SelectNameContainer>
         <ArrowContainer>
-          <Arrow />
+          <RightArrow />
         </ArrowContainer>
       </ContainerSelect>
       <ContainerSelect>
@@ -139,61 +147,21 @@ export const ModalFilter = () => {
           <SelectPrompt>Select one</SelectPrompt>
         </SelectNameContainer>
         <ArrowContainer>
-          <Arrow />
+          <RightArrow />
         </ArrowContainer>
       </ContainerSelect>
       <HeadLine>Status</HeadLine>
-      <MapContainer>
-        {status.map((item, key) => (
-          <ItemContainer>
-            {checkedStatus === key ? (
-              <>
-                <RadioButton color={colors.indigo} />
-                <TextContainer>
-                  <StatusText>{item}</StatusText>
-                </TextContainer>
-              </>
-            ) : (
-              <>
-                <RadioButton
-                  onPress={() => {
-                    setCheckedStatus(key)
-                  }}
-                />
-                <TextContainer>
-                  <StatusText>{item}</StatusText>
-                </TextContainer>
-              </>
-            )}
-          </ItemContainer>
-        ))}
-      </MapContainer>
+      <Status
+        status={status}
+        checkedStatus={checkedStatus}
+        setCheckedStatus={setCheckedStatus}
+      />
       <HeadLine>Gender</HeadLine>
-      <MapContainer>
-        {gender.map((item, key) => (
-          <ItemContainer key={item}>
-            {checkedGender === key ? (
-              <>
-                <RadioButton color={colors.indigo} />
-                <TextContainer>
-                  <StatusText>{item}</StatusText>
-                </TextContainer>
-              </>
-            ) : (
-              <>
-                <RadioButton
-                  onPress={() => {
-                    setCheckedGender(key)
-                  }}
-                />
-                <TextContainer>
-                  <StatusText>{item}</StatusText>
-                </TextContainer>
-              </>
-            )}
-          </ItemContainer>
-        ))}
-      </MapContainer>
+      <Gender
+        gender={gender}
+        checkedGender={checkedGender}
+        setCheckedGender={setCheckedGender}
+      />
     </Container>
   )
 }

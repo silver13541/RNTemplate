@@ -1,9 +1,9 @@
 import React from 'react'
-import Svg, { Path, SvgProps } from 'react-native-svg'
+import Svg, { Path } from 'react-native-svg'
 
 import { colors } from 'src/theme/colors'
 
-export const Arrow = () => {
+export const RightArrow = () => {
   return (
     <Svg width={9} height={16} fill="none">
       <Path
