@@ -1,38 +1,40 @@
 import React, {
   createContext,
+  Dispatch,
   ReactElement,
   SetStateAction,
   useContext,
   useMemo,
   useState,
 } from 'react'
+import noop from 'lodash/noop'
 
 import { FilterCharacter } from 'src/generated/graphql'
 
-type MyContext = {
+type Context = {
   name: FilterCharacter['name']
-  setName: React.Dispatch<SetStateAction<FilterCharacter['name']>>
+  setName: Dispatch<SetStateAction<FilterCharacter['name']>>
   species: FilterCharacter['species']
-  setSpecies: React.Dispatch<SetStateAction<FilterCharacter['species']>>
+  setSpecies: Dispatch<SetStateAction<FilterCharacter['species']>>
   status: FilterCharacter['status']
-  setStatus: React.Dispatch<SetStateAction<FilterCharacter['status']>>
+  setStatus: Dispatch<SetStateAction<FilterCharacter['status']>>
   gender: FilterCharacter['gender']
-  setGender: React.Dispatch<SetStateAction<FilterCharacter['gender']>>
+  setGender: Dispatch<SetStateAction<FilterCharacter['gender']>>
 }
 
 type Props = {
   children: React.ReactNode
 }
 
-const initialState: MyContext = {
+const initialState: Context = {
   name: '',
-  setName: (setName) => setName,
+  setName: noop,
   species: '',
-  setSpecies: (setSpecies) => setSpecies,
+  setSpecies: noop,
   status: '',
-  setStatus: (setStatus) => setStatus,
+  setStatus: noop,
   gender: '',
-  setGender: (setGender) => setGender,
+  setGender: noop,
 }
 
 export const CharacterContext = createContext(initialState)
@@ -64,4 +66,4 @@ export const CharacterContextProvider = ({ children }: Props): ReactElement => {
   )
 }
 
-export const useCharacterContext = (): MyContext => useContext(CharacterContext)
+export const useCharacterContext = (): Context => useContext(CharacterContext)
