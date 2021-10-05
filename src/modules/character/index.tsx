@@ -8,6 +8,7 @@ import { colors } from 'src/theme/colors'
 import { ModalMenu } from 'src/ui/modal'
 
 import { CharacterCard } from './character-card'
+import { useCharacterContext } from './character-context'
 import { ModalFilter } from './modal-filter'
 
 const Container = styled.View`
@@ -24,6 +25,9 @@ export const CharacterScreen = () => {
   const navigation = useNavigation()
   const [showModal, setShowModal] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
+  const { gender, status } = useCharacterContext()
+  console.log(gender, status)
+
   navigation.setOptions({
     headerRight: () => (
       <TouchableOpacity onPress={() => setShowModal(true)}>

@@ -31,17 +31,21 @@ const StatusText = styled.Text`
 `
 
 interface IProps {
-  data: string[]
-  checked: number
-  setChecked: React.Dispatch<React.SetStateAction<number>>
+  children: string[]
+  setFilter: React.Dispatch<React.SetStateAction<string>>
+  data: string
 }
 
-export const FilterContainer = ({ data, checked, setChecked }: IProps) => {
+export const FilterContainer = ({ children, setFilter, data }: IProps) => {
   return (
     <MapContainer>
-      {data.map((item, key) => (
-        <ItemContainer key={item} onPress={() => setChecked(key)}>
-          <RadioButton isChecked={checked === key} />
+      {children.map((item, key) => (
+        <ItemContainer
+          key={item}
+          onPress={() => {
+            setFilter(children[key])
+          }}>
+          <RadioButton isChecked={children.indexOf(data) === key} />
           <TextContainer>
             <StatusText>{item}</StatusText>
           </TextContainer>
