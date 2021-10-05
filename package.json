@@ -13,21 +13,21 @@
     "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
-    "@apollo/client": "^3.4.15",
+    "@apollo/client": "3.4.15",
     "@react-native-community/blur": "3.6.0",
     "@react-navigation/bottom-tabs": "6.0.7",
     "@react-navigation/native": "6.0.4",
     "@react-navigation/native-stack": "6.2.2",
-    "graphql": "^15.6.0",
+    "graphql": "15.6.0",
     "lodash": "4.17.21",
     "react": "17.0.2",
     "react-native": "0.65.1",
-    "react-native-modal": "^13.0.0",
+    "react-native-modal": "13.0.0",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "3.8.0",
-    "react-native-svg": "^12.1.1",
+    "react-native-svg": "12.1.1",
     "styled-components": "5.3.1",
-    "styled-tools": "^1.7.2"
+    "styled-tools": "1.7.2"
   },
   "devDependencies": {
     "@babel/core": "7.12.9",
