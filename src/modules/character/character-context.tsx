@@ -56,7 +56,7 @@ export const CharacterContextProvider = ({ children }: Props): ReactElement => {
       gender,
       setGender,
     }),
-    [name, setName, species, setSpecies, status, setStatus, gender, setGender],
+    [gender, name, species, status],
   )
 
   return (
