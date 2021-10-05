@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components/native'
-import { ifProp, prop } from 'styled-tools'
+import { ifProp } from 'styled-tools'
 
 import { RightArrow } from 'src/assets/images/icons/RightArrow'
 import { colors } from 'src/theme/colors'
@@ -8,6 +8,10 @@ import { Button } from 'src/ui/button'
 
 import { Gender } from './gender'
 import { Status } from './status'
+
+interface IProps {
+  isChecked?: boolean
+}
 
 const Container = styled.View`
   background-color: ${colors.white};
@@ -47,7 +51,7 @@ const ContainerSelect = styled.TouchableOpacity`
   margin-bottom: 19px;
 `
 
-export const RadioButton = styled.View`
+export const RadioButton = styled.View<IProps>`
   width: 22px;
   height: 22px;
   background-color: ${ifProp(
