@@ -25,8 +25,7 @@ export const CharacterScreen = () => {
   const navigation = useNavigation()
   const [showModal, setShowModal] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
-  const { gender, status } = useCharacterContext()
-  console.log(gender, status)
+  const { filteredCharacters } = useCharacterContext()
 
   navigation.setOptions({
     headerRight: () => (
@@ -39,6 +38,7 @@ export const CharacterScreen = () => {
   const { data, loading, fetchMore } = useCharactersQuery({
     variables: {
       page: 1,
+      filter: filteredCharacters,
     },
   })
 

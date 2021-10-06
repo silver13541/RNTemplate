@@ -20,6 +20,7 @@ type Context = {
   setStatus: Dispatch<SetStateAction<FilterCharacter['status']>>
   gender: FilterCharacter['gender']
   setGender: Dispatch<SetStateAction<FilterCharacter['gender']>>
+  filteredCharacters: FilterCharacter
 }
 
 type Props = {
@@ -35,6 +36,7 @@ const initialState: Context = {
   setStatus: noop,
   gender: '',
   setGender: noop,
+  filteredCharacters: { name: '', gender: '', status: '', species: '' },
 }
 
 export const CharacterContext = createContext(initialState)
@@ -55,6 +57,7 @@ export const CharacterContextProvider = ({ children }: Props): ReactElement => {
       setStatus,
       gender,
       setGender,
+      filteredCharacters: { name, gender, status, species },
     }),
     [gender, name, species, status],
   )
