@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/native'
 
-import { RadioButton } from 'src/modules/character/modal-filter'
+import { RadioButton } from './radio-button'
 
 const MapContainer = styled.View`
   border-top-width: 0.4px;
@@ -31,21 +31,21 @@ const StatusText = styled.Text`
 `
 
 interface IProps {
-  children: string[]
-  setFilter: React.Dispatch<React.SetStateAction<string>>
-  data: string
+  array: string[]
+  filterItem: string
+  setFilter: (string: string) => void
 }
 
-export const FilterContainer = ({ children, setFilter, data }: IProps) => {
+export const FilterContainer = ({ filterItem, array, setFilter }: IProps) => {
+  const onPress = (item: string) => {
+    setFilter(item)
+  }
+
   return (
     <MapContainer>
-      {children.map((item, key) => (
-        <ItemContainer
-          key={item}
-          onPress={() => {
-            setFilter(children[key])
-          }}>
-          <RadioButton isChecked={children.indexOf(data) === key} />
+      {array.map((item) => (
+        <ItemContainer key={item} onPress={() => onPress(item)}>
+          <RadioButton isChecked={item === filterItem} />
           <TextContainer>
             <StatusText>{item}</StatusText>
           </TextContainer>

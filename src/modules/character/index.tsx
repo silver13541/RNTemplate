@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FlatList, Text, TouchableOpacity } from 'react-native'
+import { ActivityIndicator, FlatList, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 
 import { useCharactersQuery } from 'src/generated/graphql'
@@ -21,24 +21,40 @@ const TextFilter = styled.Text`
   line-height: 22px;
 `
 
+const ActiveFilter = styled.View`
+  background-color: ${colors.indigo};
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
+  margin-right: 6px;
+`
+
+const FilterContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+`
+
 export const CharacterScreen = () => {
   const navigation = useNavigation()
   const [showModal, setShowModal] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
-  const { filteredCharacters } = useCharacterContext()
+  const { applyFiltersCharacters } = useCharacterContext()
 
   navigation.setOptions({
     headerRight: () => (
-      <TouchableOpacity onPress={() => setShowModal(true)}>
-        <TextFilter>Filter</TextFilter>
-      </TouchableOpacity>
+      <FilterContainer>
+        <ActiveFilter />
+        <TouchableOpacity onPress={() => setShowModal(true)}>
+          <TextFilter>Filter</TextFilter>
+        </TouchableOpacity>
+      </FilterContainer>
     ),
   })
 
   const { data, loading, fetchMore } = useCharactersQuery({
     variables: {
       page: 1,
-      filter: filteredCharacters,
+      filter: applyFiltersCharacters,
     },
   })
 
@@ -65,7 +81,7 @@ export const CharacterScreen = () => {
     <CharacterCard name={item.name} status={item.status} image={item.image} />
   )
 
-  if (loading) return <Text>Loading...</Text>
+  if (loading) return <ActivityIndicator size="large" />
 
   return (
     <Container>
@@ -78,7 +94,7 @@ export const CharacterScreen = () => {
         renderItem={renderItem}
       />
       <ModalMenu showModal={showModal} setShowModal={setShowModal}>
-        <ModalFilter />
+        <ModalFilter setShowModal={setShowModal} />
       </ModalMenu>
     </Container>
   )

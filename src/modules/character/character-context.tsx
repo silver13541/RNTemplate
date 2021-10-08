@@ -12,54 +12,75 @@ import noop from 'lodash/noop'
 import { FilterCharacter } from 'src/generated/graphql'
 
 type Context = {
-  name: FilterCharacter['name']
-  setName: Dispatch<SetStateAction<FilterCharacter['name']>>
-  species: FilterCharacter['species']
-  setSpecies: Dispatch<SetStateAction<FilterCharacter['species']>>
-  status: FilterCharacter['status']
-  setStatus: Dispatch<SetStateAction<FilterCharacter['status']>>
-  gender: FilterCharacter['gender']
-  setGender: Dispatch<SetStateAction<FilterCharacter['gender']>>
-  filteredCharacters: FilterCharacter
+  filtersCharacters: FilterCharacter
+  applyFiltersCharacters: FilterCharacter
+  setFiltersCharacters: Dispatch<SetStateAction<FilterCharacter>>
+  setApplyFiltersCharacters: Dispatch<SetStateAction<FilterCharacter>>
+  setFilterName: (value: string) => void
+  setFilterGender: (value: string) => void
+  setFilterStatus: (value: string) => void
+  setFilterSpecies: (value: string) => void
 }
 
 type Props = {
   children: React.ReactNode
 }
 
-const initialState: Context = {
+export const ModelFilters = {
   name: '',
-  setName: noop,
-  species: '',
-  setSpecies: noop,
-  status: '',
-  setStatus: noop,
   gender: '',
-  setGender: noop,
-  filteredCharacters: { name: '', gender: '', status: '', species: '' },
+  status: '',
+  species: '',
+}
+
+const initialState: Context = {
+  filtersCharacters: { ...ModelFilters },
+  applyFiltersCharacters: { ...ModelFilters },
+  setApplyFiltersCharacters: noop,
+  setFiltersCharacters: noop,
+  setFilterName: noop,
+  setFilterGender: noop,
+  setFilterStatus: noop,
+  setFilterSpecies: noop,
 }
 
 export const CharacterContext = createContext(initialState)
 
 export const CharacterContextProvider = ({ children }: Props): ReactElement => {
-  const [name, setName] = useState('')
-  const [species, setSpecies] = useState('')
-  const [status, setStatus] = useState('')
-  const [gender, setGender] = useState('')
+  const [filtersCharacters, setFiltersCharacters] = useState({
+    ...ModelFilters,
+  })
+  const [applyFiltersCharacters, setApplyFiltersCharacters] = useState({
+    ...ModelFilters,
+  })
 
+  const setFilterName = (value: string) => {
+    setFiltersCharacters((prev) => ({ ...prev, name: value }))
+  }
+
+  const setFilterGender = (value: string) => {
+    setFiltersCharacters((prev) => ({ ...prev, gender: value }))
+  }
+
+  const setFilterStatus = (value: string) => {
+    setFiltersCharacters((prev) => ({ ...prev, status: value }))
+  }
+
+  const setFilterSpecies = (value: string) => {
+    setFiltersCharacters((prev) => ({ ...prev, species: value }))
+  }
   const value = useMemo(
     () => ({
-      name,
-      setName,
-      species,
-      setSpecies,
-      status,
-      setStatus,
-      gender,
-      setGender,
-      filteredCharacters: { name, gender, status, species },
+      filtersCharacters,
+      applyFiltersCharacters,
+      setFiltersCharacters,
+      setApplyFiltersCharacters,
+      setFilterSpecies,
+      setFilterName,
+      setFilterGender,
+      setFilterStatus,
     }),
-    [gender, name, species, status],
+    [filtersCharacters, applyFiltersCharacters],
   )
 
   return (
