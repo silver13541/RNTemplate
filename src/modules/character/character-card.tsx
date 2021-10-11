@@ -1,10 +1,11 @@
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 import styled from 'styled-components/native'
 
 import { CharactersQuery } from 'src/generated/graphql'
 import { colors } from 'src/theme/colors'
 
-const Container = styled.View`
+const Container = styled.TouchableOpacity`
   background-color: ${colors.white};
   margin: 9px 9px;
   width: 163px;
@@ -39,9 +40,12 @@ export const CharacterCard = ({
   name,
   status,
   image,
+  id,
 }: CharactersQuery['characters']['results']) => {
+  const navigation = useNavigation()
+
   return (
-    <Container>
+    <Container onPress={() => navigation.navigate('Character', { id })}>
       <CharImage source={{ uri: image }} />
       <TextContainer>
         <Status>{status}</Status>

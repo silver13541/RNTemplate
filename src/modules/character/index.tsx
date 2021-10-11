@@ -3,6 +3,7 @@ import { ActivityIndicator, FlatList, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 
 import { useCharactersQuery } from 'src/generated/graphql'
+import { CharactersQuery } from 'src/generated/graphql'
 import { useNavigation } from 'src/navigation/routes'
 import { colors } from 'src/theme/colors'
 import { ModalMenu } from 'src/ui/modal'
@@ -33,6 +34,10 @@ const FilterContainer = styled.View`
   flex-direction: row;
   align-items: center;
 `
+
+interface IRenderItem {
+  item: CharactersQuery['characters']['results']
+}
 
 export const CharacterScreen = () => {
   const navigation = useNavigation()
@@ -77,8 +82,13 @@ export const CharacterScreen = () => {
     setCurrentPage(currentPage + 1)
   }
 
-  const renderItem = ({ item }) => (
-    <CharacterCard name={item.name} status={item.status} image={item.image} />
+  const renderItem = ({ item }: IRenderItem) => (
+    <CharacterCard
+      name={item?.name}
+      status={item?.status}
+      image={item?.image}
+      id={item?.id}
+    />
   )
 
   if (loading) return <ActivityIndicator size="large" />
