@@ -90,7 +90,7 @@ export type FilterCharacter = {
   name: Maybe<Scalars['String']>
   species: Maybe<Scalars['String']>
   status: Maybe<Scalars['String']>
-  type?: Maybe<Scalars['String']>
+  type: Maybe<Scalars['String']>
 }
 
 export type FilterEpisode = {
@@ -199,6 +199,54 @@ export type QueryLocationsByIdsArgs = {
   ids: Array<Scalars['ID']>
 }
 
+export type CharacterQueryVariables = Exact<{
+  id: Scalars['ID']
+}>
+
+export type CharacterQuery = {
+  __typename?: 'Query'
+  character:
+    | {
+        __typename?: 'Character'
+        id: string | null | undefined
+        name: string | null | undefined
+        image: string | null | undefined
+        status: string | null | undefined
+        species: string | null | undefined
+        gender: string | null | undefined
+        type: string | null | undefined
+        origin:
+          | {
+              __typename?: 'Location'
+              id: string | null | undefined
+              name: string | null | undefined
+            }
+          | null
+          | undefined
+        location:
+          | {
+              __typename?: 'Location'
+              id: string | null | undefined
+              name: string | null | undefined
+            }
+          | null
+          | undefined
+        episode: Array<
+          | {
+              __typename?: 'Episode'
+              id: string | null | undefined
+              episode: string | null | undefined
+              name: string | null | undefined
+              air_date: string | null | undefined
+            }
+          | null
+          | undefined
+        >
+      }
+    | null
+    | undefined
+}
+
 export type CharactersQueryVariables = Exact<{
   page: Maybe<Scalars['Int']>
   filter: Maybe<FilterCharacter>
@@ -228,6 +276,82 @@ export type CharactersQuery = {
     | undefined
 }
 
+export const CharacterDocument = gql`
+  query Character($id: ID!) {
+    character(id: $id) {
+      id
+      name
+      image
+      status
+      species
+      gender
+      type
+      origin {
+        id
+        name
+      }
+      location {
+        id
+        name
+      }
+      episode {
+        id
+        episode
+        name
+        air_date
+      }
+    }
+  }
+`
+
+/**
+ * __useCharacterQuery__
+ *
+ * To run a query within a React component, call `useCharacterQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCharacterQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCharacterQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useCharacterQuery(
+  baseOptions: Apollo.QueryHookOptions<CharacterQuery, CharacterQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+
+  return Apollo.useQuery<CharacterQuery, CharacterQueryVariables>(
+    CharacterDocument,
+    options,
+  )
+}
+
+export function useCharacterLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    CharacterQuery,
+    CharacterQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+
+  return Apollo.useLazyQuery<CharacterQuery, CharacterQueryVariables>(
+    CharacterDocument,
+    options,
+  )
+}
+export type CharacterQueryHookResult = ReturnType<typeof useCharacterQuery>
+export type CharacterLazyQueryHookResult = ReturnType<
+  typeof useCharacterLazyQuery
+>
+export type CharacterQueryResult = Apollo.QueryResult<
+  CharacterQuery,
+  CharacterQueryVariables
+>
 export const CharactersDocument = gql`
   query Characters($page: Int, $filter: FilterCharacter) {
     characters(page: $page, filter: $filter) {
